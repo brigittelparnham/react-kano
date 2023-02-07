@@ -1,0 +1,21 @@
+
+
+.navBar{
+   
+    background-color:#fc8003;
+
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#userDetails{
+    padding: 0.5rem;
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+#kanoLogo{
+    max-height: 3rem;
+}
