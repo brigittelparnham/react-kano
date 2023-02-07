@@ -9,18 +9,18 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Kano Api');
+    res.send('Kano Api');
 })
 
 app.post('/login', async (req, res, next) => {
-  try{
-    console.log(req.body);
-    const jwt = await services.loginUser(req.body.username, req.body.password);
-    res.send(jwt);
-    next();
-  }catch(e){
-    next(e);
-  }
+    try {
+        console.log(req.body);
+        const jwt = await services.loginUser(req.body.username, req.body.password);
+        res.send(jwt);
+        next();
+    } catch (e) {
+        next(e);
+    }
 
 })
 
@@ -29,10 +29,10 @@ app.post('/login', async (req, res, next) => {
  * reject any requests with an invalid JWT
  * 
  */
-app.use((res,req,next)=>{
-  //TODO
+app.use((res, req, next) => {
+    //TODO
 
-  next();
+    next();
 })
 
 /**
@@ -40,12 +40,17 @@ app.use((res,req,next)=>{
  * get a personalised feed for the user
  * 
  */
-app.get('/feed',(res,req,next)=>{
-  //TODO
-
+app.get('/feed', async (req, res, next) => {
+    try {
+        const creations = await services.creations();
+        res.send(creations);
+        next();
+    } catch (e) {
+        next(e);
+    }
 
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })

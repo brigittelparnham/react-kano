@@ -62,4 +62,35 @@ function getUserFromUsername(username){
     });
 }
 
-module.exports = {loginUser};
+/* Get all creations */
+async function creations() {
+    const creations = await getCreations();
+   // console.log(creations, 'hi');
+    //If none found
+    assert(creations, "no creations");
+
+    return creations;
+
+
+}
+
+
+function getCreations() {
+    const sql = `SELECT * FROM user_creations`
+    let data = [];
+    return new Promise((resolve, reject) => {
+        db.all(sql, [], function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                console.log(typeof(rows));
+                resolve(rows);
+                
+            }
+        })
+    });
+
+}
+
+
+module.exports = {loginUser, creations};

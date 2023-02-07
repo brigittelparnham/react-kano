@@ -4,6 +4,7 @@ export class ApiClient{
 
     url;
     token;
+    feed;
 
     constructor(_url){
         this.url = _url;
@@ -33,7 +34,28 @@ export class ApiClient{
      * This will be a secure route so jwt needs to be provided in the header
      * 
      */
-    async getFeed(){
+    async getFeed() {
+        const headers = {
+            "Authorization": "JWT" + this.token
+        }
+
+        const response = await fetch(`${this.url}/feed`, {
+            method: "GET",
+            headers
+        }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Something went wrong');
+       
+        }).catch(function (error) {
+            console.log("request failed", error);
+        });
+
+
+        this.feed = await response;
+
+        return this.feed;
 
     }
 }

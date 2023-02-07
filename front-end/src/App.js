@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import Home from './components/home';
 import {ApiProvider, ApiClient} from './components/apiProvider';
 import { decodeToken, isExpired } from "react-jwt";
@@ -10,11 +10,12 @@ function App() {
   const [token, setToken] = useState(apiClient.token);
   const user = decodeToken(token);
   const tokenExpired = isExpired(token);
-  const tokenFetchedRef = useRef(false);
+    const tokenFetchedRef = useRef(false);
 
-  useEffect(()=>{
+
+    useEffect(() => {
     if(!tokenFetchedRef.current && (!token || tokenExpired)){
-      tokenFetchedRef.current = true;
+        tokenFetchedRef.current = true;
       apiClient.loginUser(process.env.REACT_APP_TEST_USERNAME, process.env.REACT_APP_TEST_PASSWORD)
       .then(t=>{
         setToken(t);
